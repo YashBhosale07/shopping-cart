@@ -1,6 +1,11 @@
-import React from 'react'
+
+import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { ProductContext } from '../Constants/Content'
 
 const NavBar = () => {
+  const [,,category]=useContext(ProductContext)
+  
   return (
     <nav className="flex flex-col items-center pt-5">
         <a
@@ -11,20 +16,16 @@ const NavBar = () => {
         </a>
         <hr className="my-3 w-[80%]" />
         <h1 className="text-2xl w-[80%] mb-3">Category Filter</h1>
-        <ul className="w-[80%]">
-          <li className="flex items-center mb-3">
+
+        {category.map((value,index)=>(
+          <div key={index} className="w-[80%]">
+          <Link className="flex items-center mb-3 text-m">
             <span className="h-[15px] w-[15px] mr-2 rounded-full bg-blue-100"></span>
-            cat1
-          </li>
-          <li className="flex items-center mb-3">
-            <span className="h-[15px] w-[15px] mr-2 rounded-full bg-red-100"></span>
-            cat2
-          </li>
-          <li className="flex items-center mb-3">
-            <span className="h-[15px] w-[15px] mr-2 rounded-full bg-green-100"></span>
-            cat3
-          </li>
-        </ul>
+            {value}
+          </Link>
+          
+        </div>
+        ))}
       </nav>
   )
 }
